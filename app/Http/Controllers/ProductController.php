@@ -9,17 +9,14 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
-use function GuzzleHttp\Promise\all;
 
 class ProductController extends Controller
 {
     /**
-     * @return View|Factory|Response|Application
+     * @return View
      */
-    public function index(): View|Factory|Response|Application
+    public function index(): View
     {
         $products = Product::get();
         return view('index', ['products' => $products]);
@@ -52,7 +49,6 @@ class ProductController extends Controller
      */
     public function create(): View
     {
-
         return view('create');
     }
 
@@ -79,16 +75,15 @@ class ProductController extends Controller
     /**
      * @param UpdateProductRequest $request
      * @param int $id
-     * @return View|Factory|Application
+     * @return View
      */
-    public function update(UpdateProductRequest $request, int $id): View|Factory|Application
+    public function update(UpdateProductRequest $request, int $id): View
     {
-        $products = Product::find($id);
         $data = [
             'color' => $request->input('color'),
             'size' => $request->input('size')
         ];
-        $products = Product::where('id', $id)->update([
+        Product::where('id', $id)->update([
             'article' => $request->input('article'),
             'name' => $request->input('name'),
             'status' => $request->input('status'),

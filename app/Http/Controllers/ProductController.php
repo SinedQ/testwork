@@ -17,9 +17,7 @@ use function GuzzleHttp\Promise\all;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|View|Response
+     * @return View|Factory|Response|Application
      */
     public function index(): View|Factory|Response|Application
     {
@@ -28,38 +26,29 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
      * @param CreateProductRequest $request
      * @return RedirectResponse
      */
     public function store(CreateProductRequest $request): RedirectResponse
     {
-
-
         $data = [
             'color' => $request->input('color'),
             'size' => $request->input('size')
         ];
-
         $products = Product::create([
             'article' => $request->input('article'),
             'name' => $request->input('name'),
             'status' => $request->input('status'),
             'data' => ($data)
         ]);
-
         if ($products) {
             return redirect()->route('product.index')->with('success', 'Продукт создан');
         }
-
         return back()->withInput()->with('error', 'Продукт не создан');
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return View|
+     * @return View
      */
     public function create(): View
     {
@@ -68,8 +57,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param int $id
      * @return View
      */
@@ -80,8 +67,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
      * @param int $id
      * @return View
      */
@@ -92,11 +77,9 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
      * @param UpdateProductRequest $request
      * @param int $id
-     * @return Application|Factory|View
+     * @return View|Factory|Application
      */
     public function update(UpdateProductRequest $request, int $id): View|Factory|Application
     {
@@ -113,17 +96,10 @@ class ProductController extends Controller
         ]);
         $products = Product::get();
         return view('index', ['products' => $products]);
-//        if ($products) {
-//            return redirect()->route('product.index')->with('success', 'Продукт создан');
-//        }
-//
-//        return back()->withInput()->with('error', 'Продукт не создан');
     }
 
 
     /**
-     * Remove the specified resource from storage.
-     *
      * @param int $id
      * @return RedirectResponse
      */

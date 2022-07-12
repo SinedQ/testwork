@@ -19,6 +19,9 @@ class Product extends Model
         'status',
         'data'
     ];
+    /**
+     * @var string[]
+     */
     protected $casts = [
         'data' => 'array'
     ];

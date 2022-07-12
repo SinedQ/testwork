@@ -31,6 +31,9 @@ class UpdateProductRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function messages()
     {
         return [
@@ -41,6 +44,9 @@ class UpdateProductRequest extends FormRequest
 
     }
 
+    /**
+     * @return string[]
+     */
     public function attributes()
     {
         return [

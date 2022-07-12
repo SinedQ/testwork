@@ -23,8 +23,6 @@ class CreateProductRequest extends FormRequest
      */
     public function rules()
     {
-
-
         return [
             'article' => 'required|unique:products|regex:/(^[A-Za-z0-9 ]+$)+/',
             'name' => 'required|min:10',
@@ -33,6 +31,9 @@ class CreateProductRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function messages()
     {
         return [
@@ -43,6 +44,9 @@ class CreateProductRequest extends FormRequest
 
     }
 
+    /**
+     * @return string[]
+     */
     public function attributes()
     {
         return [
